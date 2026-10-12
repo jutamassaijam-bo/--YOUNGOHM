@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 50px;
+      font-family: Georgia, 'Times New Roman', serif;
+      background-color: rgb(225, 209, 173);
+      color: #150d04;
+    }
+
+    #app {
+      width: 230px;
+    }
+
+    h1 {
+      margin: 0 0 18px;
+      font-size: 30px;
+      font-weight: bold;
+    }
+
+    h2 {
+      margin: 0 0 16px;
+      font-size: 16px;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    p {
+      margin: 0 0 16px;
+      font-size: 14px;
+    }
+
+    img {
+      display: flex;
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      margin-bottom: 8px;
+    }
+
+    .link {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    a {
+      font-size: 13px;
+      color: #333;
+    }
+
+    a:hover {
+      color: #0077cc
+    }
+
+    .ceator {
+      margin-top: 20px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+  <main id="app"></main>
+
+  <script>
+    const app = document.getElementById("app");
+
+    fetch("data.json")
+      .then(function (response) {
+        if (!response.ok) {
+        }
+
+        return response.json();
+      })
+      .then(function (data) {
+        const title =
+          document.createElement("h1");
+        title.textContent = data.name;
+
+        const artist =
+          document.createElement("h2");
+        artist.textContent = data.artist;
+
+        const release =
+          document.createElement("p");
+        release.textContent = "Release:" + data.release_year;
+
+        const coverImage =
+          document.createElement("img");
+        coverImage.src = data.img;
+        coverImage.alt = data.title;
+
+        const musicLinks =
+          document.createElement("div");
+        musicLinks.className = "links";
+
+        const youtubeLink =
+          document.createElement("a");
+        youtubeLink.textContent = "Youtube";
+        youtubeLink.href = data.link.youtube;
+        youtubeLink.target = "_blank";
+        youtubeLink.rel = "noopener noreferrer";
+        youtubeLink.style.marginRight = "20px";
+
+        const spotifyLink =
+          document.createElement("a");
+        spotifyLink.textContent = "Spotify";
+        spotifyLink.href = data.link.spotify;
+        spotifyLink.target = "_blank";
+        spotifyLink.rel = "noopener noreferrer";
+        spotifyLink.style.marginRight = "20px";
+
+        const applemusicLink =
+          document.createElement("a");
+        applemusicLink.textContent = "Apple Music";
+        applemusicLink.href = data.link.apple_music;
+        applemusicLink.target = "_blank";
+        applemusicLink.rel = "noopener noreferrer";
+        applemusicLink.style.marginRight = "20px";
+
+        const ceator =
+          document.createElement("p");
+        ceator.className = "ceator";
+        ceator.textContent = "BY: JUTAMAS";
+
+        musicLinks.appendChild(youtubeLink);
+        musicLinks.appendChild(spotifyLink);
+        musicLinks.appendChild(applemusicLink);
+
+        app.appendChild(title);
+        app.appendChild(artist);
+        app.appendChild(release);
+        app.appendChild(coverImage);
+        app.appendChild(musicLinks);
+        app.appendChild(ceator);
+      })
+
+  </script>
+</body>
+
+</html>
